@@ -1,0 +1,23 @@
+{
+  "name": "antarctic-digital-twin-backend",
+  "version": "1.0.0",
+  "description": "Backend API service connecting Antarctic Digital Twin to MongoDB",
+  "main": "src/server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node src/seed.js"
+  },
+  "dependencies": {
+    "antarctic-digital-twin-workspace": "file:..",
+    "bcryptjs": "^3.0.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.3.1",
+    "ws": "^8.21.3"
+  }
+}

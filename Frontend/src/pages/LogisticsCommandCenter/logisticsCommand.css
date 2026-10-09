@@ -1,0 +1,681 @@
+/* Antarctic Logistics Command Center — Scoped Stylesheet */
+/* Strictly scoped under .log-cmd-app and .log-cmd-* to prevent global CSS contamination */
+
+:root {
+  --log-bg-dark: #070c1d;
+  --log-bg-card: rgba(11, 20, 46, 0.8);
+  --log-bg-card-hover: rgba(16, 28, 62, 0.95);
+  --log-border: rgba(0, 240, 255, 0.16);
+  --log-border-strong: rgba(0, 240, 255, 0.38);
+  --log-cyan: #00f0ff;
+  --log-blue: #38bdf8;
+  --log-green: #10b981;
+  --log-amber: #f59e0b;
+  --log-red: #ef4444;
+  --log-purple: #c084fc;
+  --log-text-main: #f8fafc;
+  --log-text-muted: #94a3b8;
+  --log-text-dim: #64748b;
+  --log-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --log-font-mono: 'JetBrains Mono', monospace;
+}
+
+.log-cmd-app, .logistics-command-view-root {
+  background: var(--log-bg-dark);
+  color: var(--log-text-main);
+  font-family: var(--log-font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.log-cmd-app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: radial-gradient(circle at 50% 0%, #0c1a3e 0%, #070c1d 75%);
+}
+
+/* ── Topbar ── */
+.log-cmd-topbar {
+  padding: 14px 28px;
+  background: rgba(8, 14, 34, 0.94);
+  border-bottom: 1px solid var(--log-border);
+  backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.log-cmd-topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.log-cmd-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cbd5e1;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.log-cmd-back-link:hover {
+  background: rgba(0, 240, 255, 0.12);
+  border-color: var(--log-cyan);
+  color: var(--log-cyan);
+}
+
+.log-cmd-topbar-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.log-cmd-topbar-title {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.log-cmd-badge-live {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(0, 240, 255, 0.15);
+  color: var(--log-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+  letter-spacing: 0.5px;
+}
+
+.log-cmd-topbar-subtitle {
+  font-size: 12px;
+  color: var(--log-text-muted);
+}
+
+.log-cmd-topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.log-cmd-tabs {
+  display: flex;
+  background: rgba(0, 0, 0, 0.35);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.log-cmd-tab {
+  background: transparent;
+  border: none;
+  color: var(--log-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.log-cmd-tab:hover {
+  color: #ffffff;
+}
+
+.log-cmd-tab.active {
+  background: rgba(0, 240, 255, 0.18);
+  color: var(--log-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.4);
+  box-shadow: 0 0 12px rgba(0, 240, 255, 0.2);
+}
+
+.log-cmd-sync-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-family: var(--log-font-mono);
+  color: var(--log-green);
+}
+
+.log-cmd-sync-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--log-green);
+  box-shadow: 0 0 8px var(--log-green);
+  animation: log-pulse 1.8s infinite;
+}
+
+@keyframes log-pulse {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.log-cmd-btn-emergency {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
+  transition: all 0.2s;
+}
+
+.log-cmd-btn-emergency:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.6);
+}
+
+/* ── Content Layout ── */
+.log-cmd-content {
+  padding: 24px 28px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 1680px;
+  margin: 0 auto;
+  width: calc(100% - 56px);
+  box-sizing: border-box;
+}
+
+/* ── Grids ── */
+.log-cmd-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 16px;
+}
+
+.log-cmd-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.log-cmd-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.log-cmd-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+
+.log-cmd-grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+}
+
+.log-cmd-grid-1-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 20px;
+}
+
+/* ── Card Styles ── */
+.log-cmd-card {
+  background: var(--log-bg-card);
+  border: 1px solid var(--log-border);
+  border-radius: 14px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+  transition: all 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.log-cmd-card:hover {
+  border-color: var(--log-border-strong);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 20px rgba(0, 240, 255, 0.08);
+}
+
+.log-cmd-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.log-cmd-card-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-cmd-card-subtitle {
+  font-size: 11px;
+  color: var(--log-text-muted);
+  margin-top: 2px;
+}
+
+/* ── Dedicated Emergency Command Center Card ── */
+.log-cmd-emergency-banner {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(11, 20, 46, 0.95) 70%);
+  border: 1px solid rgba(239, 68, 68, 0.45);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.15);
+  border-radius: 14px;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.log-cmd-emergency-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--log-red);
+}
+
+.log-cmd-emergency-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.log-cmd-emergency-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-cmd-emergency-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr;
+  gap: 18px;
+}
+
+/* ── Live Vessel Card ── */
+.log-cmd-vessel-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.log-cmd-vessel-card:hover {
+  background: rgba(0, 240, 255, 0.06);
+  border-color: rgba(0, 240, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.log-cmd-vessel-card.active {
+  border-color: var(--log-cyan);
+  background: rgba(0, 240, 255, 0.1);
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.15);
+}
+
+.log-cmd-vessel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.log-cmd-vessel-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.log-cmd-vessel-route {
+  font-size: 11px;
+  color: var(--log-cyan);
+  font-family: var(--log-font-mono);
+  margin-top: 2px;
+}
+
+.log-cmd-progress-container {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.log-cmd-progress-bar-track {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.log-cmd-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0284c7 0%, #00f0ff 100%);
+  border-radius: 99px;
+  transition: width 0.8s ease;
+}
+
+.log-cmd-progress-text {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-family: var(--log-font-mono);
+  color: var(--log-text-muted);
+}
+
+.log-cmd-vessel-specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+
+/* ── Interactive Dual Route Map ── */
+.log-cmd-map-wrapper {
+  height: 380px;
+  background: radial-gradient(circle at 50% 30%, #0f2452 0%, #060a1a 80%);
+  border: 1px solid rgba(0, 240, 255, 0.25);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-cmd-map-grid-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(0, 240, 255, 0.08) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.log-cmd-map-radar-sweep {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.15) 0deg, transparent 60deg);
+  animation: log-radar-spin 12s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes log-radar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.log-cmd-map-node {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+  z-index: 10;
+}
+
+.log-cmd-map-node:hover {
+  transform: scale(1.15);
+  z-index: 20;
+}
+
+.log-cmd-map-node-icon {
+  font-size: 18px;
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+.log-cmd-map-node-label {
+  font-size: 10px;
+  font-weight: 700;
+  background: rgba(6, 11, 26, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: #ffffff;
+  margin-top: 4px;
+  white-space: nowrap;
+  font-family: var(--log-font-mono);
+}
+
+/* ── Cargo Manifest Table ── */
+.log-cmd-manifest-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.log-cmd-manifest-table th {
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--log-text-muted);
+  font-weight: 700;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  text-align: left;
+}
+
+.log-cmd-manifest-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  color: #cbd5e1;
+}
+
+.log-cmd-manifest-table tr:hover td {
+  background: rgba(0, 240, 255, 0.04);
+  color: #ffffff;
+}
+
+/* ── Digital Twin Supply Linkage Pipeline ── */
+.log-cmd-lifecycle-pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 14px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+.log-cmd-lifecycle-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  flex: 1;
+  min-width: 110px;
+}
+
+.log-cmd-lifecycle-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  background: rgba(0, 240, 255, 0.12);
+  border: 1px solid rgba(0, 240, 255, 0.3);
+  color: var(--log-cyan);
+}
+
+.log-cmd-lifecycle-arrow {
+  color: var(--log-text-dim);
+  font-size: 14px;
+}
+
+/* ── Modal Dialog ── */
+.log-cmd-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 3000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.log-cmd-modal-backdrop.open {
+  display: flex;
+}
+
+.log-cmd-modal {
+  background: #0a1126;
+  border: 1px solid var(--log-border-strong);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 35px rgba(239, 68, 68, 0.2);
+  border-radius: 14px;
+  width: 580px;
+  max-width: 92vw;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.log-cmd-modal-header {
+  padding: 16px 20px;
+  background: rgba(239, 68, 68, 0.12);
+  border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.log-cmd-modal-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.log-cmd-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.log-cmd-form-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--log-text-muted);
+  text-transform: uppercase;
+}
+
+.log-cmd-form-input, .log-cmd-form-select, .log-cmd-form-textarea {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  outline: none;
+  font-family: var(--log-font-sans);
+}
+
+.log-cmd-form-input:focus, .log-cmd-form-select:focus, .log-cmd-form-textarea:focus {
+  border-color: var(--log-cyan);
+  box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+.log-cmd-modal-footer {
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* ── Toast Notifications ── */
+.log-cmd-toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.log-cmd-toast {
+  background: #0d1630;
+  border: 1px solid var(--log-cyan);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.25s;
+}
+
+/* ── Responsive Rules ── */
+@media (max-width: 1280px) {
+  .log-cmd-grid-6 { grid-template-columns: repeat(3, 1fr); }
+  .log-cmd-grid-4 { grid-template-columns: repeat(2, 1fr); }
+  .log-cmd-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .log-cmd-emergency-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px) {
+  .log-cmd-grid-6 { grid-template-columns: repeat(2, 1fr); }
+  .log-cmd-grid-2-1, .log-cmd-grid-1-2, .log-cmd-grid-2 { grid-template-columns: 1fr; }
+  .log-cmd-topbar { padding: 10px 14px; }
+  .log-cmd-content { padding: 14px; width: 100%; }
+}
+
+@media (max-width: 600px) {
+  .log-cmd-grid-6, .log-cmd-grid-4, .log-cmd-grid-3 { grid-template-columns: 1fr; }
+}

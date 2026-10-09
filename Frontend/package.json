@@ -1,0 +1,23 @@
+{
+  "name": "antarctic-digital-twin",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "antarctic-digital-twin-workspace": "file:..",
+    "chart.js": "^4.4.1",
+    "leaflet": "^1.9.4",
+    "lucide": "^0.344.0",
+    "proj4": "^2.22.0",
+    "proj4leaflet": "^1.0.2",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "vite": "^5.1.4"
+  }
+}
