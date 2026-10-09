@@ -45,13 +45,18 @@ export function renderLoginView(authService, onLoginSuccess) {
             <h2>Welcome back</h2>
           </div>
           ${import.meta.env.DEV ? `
-            <button type="button" id="polar-dev-skip-login-inline" class="polar-dev-skip-login polar-dev-skip-login-inline" aria-label="Explore the demo">
-  <span>Explore Demo</span>
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path d="M5 12h12" />
-    <path d="m13 5 7 7-7 7" />
-  </svg>
-</button>
+                      <button
+            type="button"
+            id="polar-dev-skip-login-inline"
+            class="polar-dev-skip-login polar-dev-skip-login-inline"
+            aria-label="Explore the demo"
+          >
+            <span>Explore Demo</span>
+            <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path d="M5 12h12" />
+              <path d="m13 5 7 7-7 7" />
+            </svg>
+          </button>
           ` : ''}
           <p>Sign in to access your Polar Twin workspace.</p>
         </header>
